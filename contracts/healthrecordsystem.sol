@@ -5,6 +5,8 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 
 contract healthrecordsystem is AccessControl {
 
+    error CallerNotMinter(address caller);
+
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
     bytes32 public constant PATIENT_ROLE = keccak256("PATIENT_ROLE");
     bytes32 public constant NURSE_ROLE = keccak256("NURSE_ROLE");
@@ -14,11 +16,93 @@ contract healthrecordsystem is AccessControl {
     bytes32 public constant GASTRO_DOCTOR_ROLE = keccak256("GASTRO_DOCTOR_ROLE");
     bytes32 public constant URO_DOCTOR_ROLE = keccak256("URO_DOCTOR_ROLE");
 
+    modifier onlyOrtho(address _sender){
+        require(hasRole(ORTHO_DOCTOR_ROLE, _sender), "Invalid access !!!!");
+        _;
+    }
 
-    mapping(uint => bool) public isDeleted;
-    mapping(address => Person) public persons;
-    mapping(address => Hospital) public hospitals;
+    modifier onlyCardio(address _sender){
+        require(hasRole(CARDIO_DOCTOR_ROLE, _sender), "Invalid access !!!!");
+        _;
+    }
+    modifier onlyNeuro(address _sender){
+        require(hasRole(NEURO_DOCTOR_ROLE, _sender), "Invalid access !!!!");
+        _;
+    }
+    modifier onlyGastro(address _sender){
+        require(hasRole(GASTRO_DOCTOR_ROLE, _sender), "Invalid access !!!!");
+        _;
+    }
+    modifier onlyUro(address _sender){
+        require(hasRole(URO_DOCTOR_ROLE, _sender), "Invalid access !!!!");
+        _;
+    }
 
+
+    constructor(address[] memory _patients, address[] memory _nurses, address[] memory _ortho, address[] memory _neuro, address[] memory _cardio, address[] memory _gastro, address[] memory _uro){
+        _grantRole(ADMIN_ROLE, msg.sender);
+        for(uint256 i=0; i<_patients.length; i++){
+            _grantRole(PATIENT_ROLE, _patients[i]);
+        }
+        for(uint256 i=0; i<_nurses.length; i++){
+            _grantRole(NURSE_ROLE, _nurses[i]);
+        }
+        for(uint256 i=0; i<_ortho.length; i++){
+            _grantRole(ORTHO_DOCTOR_ROLE, _ortho[i]);
+        }
+        for(uint256 i=0; i<_neuro.length; i++){
+            _grantRole(NEURO_DOCTOR_ROLE, _neuro[i]);
+        }
+        for(uint256 i=0; i<_cardio.length; i++){
+            _grantRole(CARDIO_DOCTOR_ROLE, _cardio[i]);
+        }
+        for(uint256 i=0; i<_gastro.length; i++){
+            _grantRole(GASTRO_DOCTOR_ROLE, _gastro[i]);
+        }
+        for(uint256 i=0; i<_uro.length; i++){
+            _grantRole(URO_DOCTOR_ROLE, _uro[i]);
+        }
+    }
+
+
+    function addUser(address _sender, uint64 _type) external{
+        require(hasRole(ADMIN_ROLE, msg.sender), "Invalid access");
+        if(_type==1){
+            _grantRole(PATIENT_ROLE, _sender);
+        }else if(_type==2){
+            _grantRole(NURSE_ROLE, _sender);
+        }else if(_type==3){
+            _grantRole(ORTHO_DOCTOR_ROLE, _sender);
+        }else if(_type==4){
+            _grantRole(NEURO_DOCTOR_ROLE, _sender);
+        }else if(_type==5){
+            _grantRole(CARDIO_DOCTOR_ROLE, _sender);
+        }else if(_type==6){
+            _grantRole(GASTRO_DOCTOR_ROLE, _sender);
+        }else if(_type==7){
+            _grantRole(URO_DOCTOR_ROLE, _sender);
+        }
+    }
+
+    function checkUser() external returns(uint64){
+        if(hasRole(ADMIN_ROLE, msg.sender)){
+            return 1;
+        }else if(hasRole(PATIENT_ROLE, msg.sender)){
+            return 2;
+        }else if(hasRole(NURSE_ROLE, msg.sender)){
+            return 3;
+        }else if(hasRole(ORTHO_DOCTOR_ROLE, msg.sender)){
+            return 4;
+        }else if(hasRole(NEURO_DOCTOR_ROLE, msg.sender)){
+            return 5;
+        }else if(hasRole(CARDIO_DOCTOR_ROLE, msg.sender)){
+            return 6;
+        }else if(hasRole(GASTRO_DOCTOR_ROLE, msg.sender)){
+            return 7;
+        }else if(hasRole(URO_DOCTOR_ROLE, msg.sender)){
+            return 8;
+        }
+    }
 
 //Orthopedics Test
     struct OrthopedicsTestReport {
@@ -134,9 +218,6 @@ struct CardiologyTestReport {
 
     uint reportDate;
 }
-
-
-
 
 // Gastroenterology Test
 struct GastroenterologyTestReport {
@@ -295,7 +376,8 @@ struct UrologyTestReport {
         string memory _hospitalClinic,
         string memory _contactInformation,
         uint _reportDate
-    ) public {
+    ) public onlyOrtho(msg.sender) {
+        
         orthoRecordId++;
         orthoRecords[orthoRecordId] = OrthopedicsTestReport(
             _medicalRecordNumber,
@@ -356,7 +438,7 @@ struct UrologyTestReport {
         string memory _hospitalClinic,
         string memory _contactInformation,
         uint _reportDate
-    ) public {
+    ) public onlyNeuro(msg.sender) {
         neuroRecordId++;
         neuroRecords[neuroRecordId] = NeurologyTestReport(
             _medicalRecordNumber,
@@ -416,7 +498,7 @@ function addCardiologyTestReport(
         string memory _hospitalClinic,
         string memory _contactInformation,
         uint _reportDate
-    ) public {
+    ) public onlyCardio(msg.sender) {
         cardioRecordId++;
         cardioRecords[cardioRecordId] = CardiologyTestReport(
             _medicalRecordNumber,
@@ -475,7 +557,7 @@ function addCardiologyTestReport(
         string memory _hospitalClinic,
         string memory _contactInformation,
         uint _reportDate
-    ) public {
+    ) public onlyGastro(msg.sender) {
         gastroRecordId++;
         gastroRecords[gastroRecordId] = GastroenterologyTestReport(
             _medicalRecordNumber,
@@ -534,7 +616,7 @@ function addUrologyTestReport(
         string memory _hospitalClinic,
         string memory _contactInformation,
         uint _reportDate
-    ) public {
+    ) public onlyUro(msg.sender) {
         uroRecordId++;
         uroRecords[uroRecordId]= UrologyTestReport(
             _medicalRecordNumber,
@@ -565,122 +647,6 @@ function addUrologyTestReport(
         );
 
     }
-
-
-
-
-
-    // function addRecord(
-    //     string memory _name,
-    //     uint _age,
-    //     string memory _gender,
-    //     string memory _bloodType,
-    //     string memory _allergies,
-    //     string memory _diagnosis,
-    //     string memory _treatment
-    // ) public {
-    //     recordId++;
-    //     records[recordId] = Record(
-    //         recordId,
-    //         block.timestamp,
-    //         _name,
-    //         _age,
-    //         _gender,
-    //         _bloodType,
-    //         _allergies,
-    //         _diagnosis,
-    //         _treatment
-    //     );
-    //     emit healthrecordsystem__AddRecord(
-    //         recordId,
-    //         block.timestamp,
-    //         _name,
-    //         _age,
-    //         _gender,
-    //         _bloodType,
-    //         _allergies,
-    //         _diagnosis,
-    //         _treatment
-    //     );
-    // }
-
-
-    // function deleteRecord(uint _recordId) public {
-    //     require(!isDeleted[_recordId], "The record is already deleted");
-    //     Record storage record = records[_recordId];
-    //     emit healthrecordsystem__DeleteRecord(
-    //         record.recordId,
-    //         block.timestamp,
-    //         record.name,
-    //         record.age,
-    //         record.gender,
-    //         record.bloodType,
-    //         record.allergies,
-    //         record.diagnosis,
-    //         record.treatment
-    //     );
-    //     isDeleted[_recordId] = true;
-    // }
-
-
-    // function getRecord(
-    //     uint _recordId
-    // )
-    //     public
-    //     view
-    //     returns (
-    //         uint,
-    //         string memory,
-    //         uint,
-    //         string memory,
-    //         string memory,
-    //         string memory,
-    //         string memory,
-    //         string memory
-    //     )
-    // {
-    //     Record storage record = records[_recordId];
-    //     return (
-    //         record.timestamp,
-    //         record.name,
-    //         record.age,
-    //         record.gender,
-    //         record.bloodType,
-    //         record.allergies,
-    //         record.diagnosis,
-    //         record.treatment
-    //     );
-    // }
-
-
-//     function getRecordDetails(uint _recordId) public view returns (
-//     uint, 
-//     uint, 
-//     string memory, 
-//     uint, 
-//     string memory, 
-//     string memory, 
-//     string memory, 
-//     string memory, 
-//     string memory,
-//     string memory
-// ) {
-//     require(_recordId <= recordId, "Record ID exceeds maximum");
-//     require(!isDeleted[_recordId], "Record does not exist or has been deleted");
-//     Record storage record = records[_recordId];
-//     return (
-//         record.recordId,
-//         record.timestamp,
-//         record.name,
-//         record.age,
-//         record.gender,
-//         record.bloodType,
-//         record.allergies,
-//         record.diagnosis,
-//         record.treatment,
-//         "Record found"
-//     );
-// }
 
 
     function getOrthopedicsTestReportDetails(uint _medicalRecordNumber) public view returns (
@@ -741,8 +707,6 @@ function addUrologyTestReport(
             report.reportDate
         );
     }
-
-
 
     function getUrologyTestReportDetails(uint _medicalRecordNumber) public view returns (
         uint,
@@ -864,7 +828,6 @@ function addUrologyTestReport(
         );
     }
 
-
     function getGastroenterologyTestReportDetails(uint _medicalRecordNumber) public view returns (
         uint,
         string memory,
@@ -982,7 +945,5 @@ function addUrologyTestReport(
             report.reportDate
         );
     }
-
-
     
 }

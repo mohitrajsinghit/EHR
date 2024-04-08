@@ -48,7 +48,7 @@ describe("healthrecordsystem", () => {
       expect(diagnosis).to.equal("Dengue");
       expect(treatment).to.equal("Dengue");
     });
-  });
+  });9
 
   describe("The delete function is working", () => {
     beforeEach(async () => {
