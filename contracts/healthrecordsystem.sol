@@ -110,35 +110,12 @@ contract healthrecordsystem is AccessControl {
     string patientName;
     uint age;
     string gender;
-    // string address1;
     string bloodGroup;
-    // string allergies;
     uint testDate;
-
-    // string testName;
-    // string testResult;
     string xrayTestReport;
     string mriTestReport;
     string ctScanTestReport;
     string ultrasoundTestReport;
-    // string testDescription;
-
-    // string examinationFindings;
-
-    // string diagnosis;
-
-    // string treatmentPlan;
-
-    // string prescription;
-
-    // string followUpRecommendations;
-
-
-    // string doctorName;
-    // string department;
-    // string hospitalClinic;
-    // string contactInformation;
-
     uint reportDate;
     }
 
@@ -149,35 +126,13 @@ contract healthrecordsystem is AccessControl {
     string patientName;
     uint age;
     string gender;
-    // string address1;
     string bloodGroup;
-    // string allergies;
     uint testDate;
-
-    // string testName;
-    // string testResult;
     string neurologicalExaminationReport;
     string eegReport;
     string lumbarPunctureReport;
     string neuropsychologicalTestingReport;
     string geneticTestingReport;
-    // string testDescription;
-
-    // string examinationFindings;
-
-    // string diagnosis;
-
-    // string treatmentPlan;
-
-    // string prescription;
-
-    // string followUpRecommendations;
-
-    // string doctorName;
-    // string department;
-    // string hospitalClinic;
-    // string contactInformation;
-
     uint reportDate;
 }
 
@@ -188,34 +143,12 @@ struct CardiologyTestReport {
     string patientName;
     uint age;
     string gender;
-    // string address1;
     string bloodGroup;
-    // string allergies;
     uint testDate;
-
-    // string testName;
-    // string testResult;
     string electrocardiogramReport;
     string echocardiogramReport;
     string stressTestReport;
     string cardiacMRIReport;
-    // string testDescription;
-
-    // string examinationFindings;
-
-    // string diagnosis;
-
-    // string treatmentPlan;
-
-    // string prescription;
-
-    // string followUpRecommendations;
-
-    // string doctorName;
-    // string department;
-    // string hospitalClinic;
-    // string contactInformation;
-
     uint reportDate;
 }
 
@@ -225,34 +158,12 @@ struct GastroenterologyTestReport {
     string patientName;
     uint age;
     string gender;
-    // string address1;
     string bloodGroup;
-    // string allergies;
     uint testDate;
-
-    // string testName;
-    // string testResult;
     string breathTestsReport;
     string liverBiopsyReport;
     string upperEndoscopyReport;
     string capsuleEndoscopyReport;
-    // string testDescription;
-
-    // string examinationFindings;
-
-    // string diagnosis;
-
-    // string treatmentPlan;
-
-    // string prescription;
-
-    // string followUpRecommendations;
-
-    // string doctorName;
-    // string department;
-    // string hospitalClinic;
-    // string contactInformation;
-
     uint reportDate;
 }
 
@@ -262,34 +173,12 @@ struct UrologyTestReport {
     string patientName;
     uint age;
     string gender;
-    // string address1;
     string bloodGroup;
-    // string allergies;
     uint testDate;
-
-    // string testName;
-    // string testResult;
     string urinalysisReport;
     string urinaryCultureReport;
     string cystoscopyReport;
     string prostateBiopsyReport;
-    // string testDescription;
-
-    // string examinationFindings;
-    
-    // string diagnosis;
-
-    // string treatmentPlan;
-
-    // string prescription;
-
-    // string followUpRecommendations;
-
-    // string doctorName;
-    // string department;
-    // string hospitalClinic;
-    // string contactInformation;
-
     uint reportDate;
 }
 
@@ -312,26 +201,12 @@ struct UrologyTestReport {
         string memory _patientName,
         uint _age,
         string memory _gender,
-        // string memory _address1,
         string memory _bloodGroup,
-        // string memory _allergies,
         uint _testDate,
-        // string memory _testName,
-        // string memory _testResult,
         string memory _xrayTestReport,
         string memory _mriTestReport,
         string memory _ctScanTestReport,
         string memory _ultrasoundTestReport,
-        // string memory _testDescription,
-        // string memory _examinationFindings,
-        // string memory _diagnosis,
-        // string memory _treatmentPlan,
-        // string memory _prescription,
-        // string memory _followUpRecommendations,
-        // string memory _doctorName,
-        // string memory _department,
-        // string memory _hospitalClinic,
-        // string memory _contactInformation,
         uint _reportDate
     ) public onlyOrtho(msg.sender) {
         
@@ -341,26 +216,12 @@ struct UrologyTestReport {
             _patientName,
             _age,
             _gender,
-            // _address1,
             _bloodGroup,
-            // _allergies,
             _testDate,
-            // _testName,
-            // _testResult,
             _xrayTestReport,
             _mriTestReport,
             _ctScanTestReport,
             _ultrasoundTestReport,
-            // _testDescription,
-            // _examinationFindings,
-            // _diagnosis,
-            // _treatmentPlan,
-            // _prescription,
-            // _followUpRecommendations,
-            // _doctorName,
-            // _department,
-            // _hospitalClinic,
-            // _contactInformation,
             _reportDate
         );
     }
@@ -375,25 +236,13 @@ struct UrologyTestReport {
         string memory _gender,
         // string memory _address1,
         string memory _bloodGroup,
-        // string memory _allergies,
+
         uint _testDate,
-        // string memory _testName,
-        // string memory _testResult,
         string memory _neurologyexaminationTestReport,
         string memory _electroencephalogramTestReport,
         string memory _lumbarpunctureTestReport,
         string memory _neuropsychologicalTestReport,
         string memory _geneticTestReport,
-        // string memory _testDescription,
-        // string memory _examinationFindings,
-        // string memory _diagnosis,
-        // string memory _treatmentPlan,
-        // string memory _prescription,
-        // string memory _followUpRecommendations,
-        // string memory _doctorName,
-        // string memory _department,
-        // string memory _hospitalClinic,
-        // string memory _contactInformation,
         uint _reportDate
     ) public onlyNeuro(msg.sender) {
         neuroRecordId++;
@@ -402,27 +251,13 @@ struct UrologyTestReport {
             _patientName,
             _age,
             _gender,
-            // _address1,
             _bloodGroup,
-            // _allergies,
             _testDate,
-            // _testName,
-            // _testResult,
             _neurologyexaminationTestReport,
             _electroencephalogramTestReport,
             _lumbarpunctureTestReport,
             _neuropsychologicalTestReport,
             _geneticTestReport,
-            // _testDescription,
-            // _examinationFindings,
-            // _diagnosis,
-            // _treatmentPlan,
-            // _prescription,
-            // _followUpRecommendations,
-            // _doctorName,
-            // _department,
-            // _hospitalClinic,
-            // _contactInformation,
             _reportDate
         );
 
@@ -434,26 +269,12 @@ function addCardiologyTestReport(
         string memory _patientName,
         uint _age,
         string memory _gender,
-        // string memory _address1,
         string memory _bloodGroup,
-        // string memory _allergies,
         uint _testDate,
-        // string memory _testName,
-        // string memory _testResult,
         string memory _electrocardiogramTestReport,
         string memory _echocardiogramTestReport,
         string memory _stressTestReport,
         string memory _cardiacmriTestReport,
-        // string memory _testDescription,
-        // string memory _examinationFindings,
-        // string memory _diagnosis,
-        // string memory _treatmentPlan,
-        // string memory _prescription,
-        // string memory _followUpRecommendations,
-        // string memory _doctorName,
-        // string memory _department,
-        // string memory _hospitalClinic,
-        // string memory _contactInformation,
         uint _reportDate
     ) public onlyCardio(msg.sender) {
         cardioRecordId++;
@@ -462,26 +283,12 @@ function addCardiologyTestReport(
             _patientName,
             _age,
             _gender,
-            // _address1,
             _bloodGroup,
-            // _allergies,
             _testDate,
-            // _testName,
-            // _testResult,
             _electrocardiogramTestReport,
             _echocardiogramTestReport,
             _stressTestReport,
             _cardiacmriTestReport,
-            // _testDescription,
-            // _examinationFindings,
-            // _diagnosis,
-            // _treatmentPlan,
-            // _prescription,
-            // _followUpRecommendations,
-            // _doctorName,
-            // _department,
-            // _hospitalClinic,
-            // _contactInformation,
             _reportDate
         );
 
@@ -493,26 +300,12 @@ function addCardiologyTestReport(
         string memory _patientName,
         uint _age,
         string memory _gender,
-        // string memory _address1,
         string memory _bloodGroup,
-        // string memory _allergies,
         uint _testDate,
-        // string memory _testName,
-        // string memory _testResult,
         string memory _breathTestReport,
         string memory _liverbiospyTestReport,
         string memory _upperendoscopyTestReport,
         string memory _capsuleendoscopyTestReport,
-        // string memory _testDescription,
-        // string memory _examinationFindings,
-        // string memory _diagnosis,
-        // string memory _treatmentPlan,
-        // string memory _prescription,
-        // string memory _followUpRecommendations,
-        // string memory _doctorName,
-        // string memory _department,
-        // string memory _hospitalClinic,
-        // string memory _contactInformation,
         uint _reportDate
     ) public onlyGastro(msg.sender) {
         gastroRecordId++;
@@ -521,26 +314,12 @@ function addCardiologyTestReport(
             _patientName,
             _age,
             _gender,
-            // _address1,
             _bloodGroup,
-            // _allergies,
             _testDate,
-            // _testName,
-            // _testResult,
             _breathTestReport,
             _liverbiospyTestReport,
             _upperendoscopyTestReport,
             _capsuleendoscopyTestReport,
-            // _testDescription,
-            // _examinationFindings,
-            // _diagnosis,
-            // _treatmentPlan,
-            // _prescription,
-            // _followUpRecommendations,
-            // _doctorName,
-            // _department,
-            // _hospitalClinic,
-            // _contactInformation,
             _reportDate
         );
 
@@ -552,26 +331,12 @@ function addUrologyTestReport(
         string memory _patientName,
         uint _age,
         string memory _gender,
-        // string memory _address1,
         string memory _bloodGroup,
-        // string memory _allergies,
         uint _testDate,
-        // string memory _testName,
-        // string memory _testResult,
         string memory _urinalysisTestReport,
         string memory _urinarycultureTestReport,
         string memory _cystoscopyTestReport,
         string memory _prostatebiopsyTestReport,
-        // string memory _testDescription,
-        // string memory _examinationFindings,
-        // string memory _diagnosis,
-        // string memory _treatmentPlan,
-        // string memory _prescription,
-        // string memory _followUpRecommendations,
-        // string memory _doctorName,
-        // string memory _department,
-        // string memory _hospitalClinic,
-        // string memory _contactInformation,
         uint _reportDate
     ) public onlyUro(msg.sender) {
         uroRecordId++;
@@ -580,26 +345,12 @@ function addUrologyTestReport(
             _patientName,
             _age,
             _gender,
-            // _address1,
             _bloodGroup,
-            // _allergies,
             _testDate,
-            // _testName,
-            // _testResult,
             _urinalysisTestReport,
             _urinarycultureTestReport,
             _cystoscopyTestReport,
             _prostatebiopsyTestReport,
-            // _testDescription,
-            // _examinationFindings,
-            // _diagnosis,
-            // _treatmentPlan,
-            // _prescription,
-            // _followUpRecommendations,
-            // _doctorName,
-            // _department,
-            // _hospitalClinic,
-            // _contactInformation,
             _reportDate
         );
 
@@ -612,25 +363,11 @@ function addUrologyTestReport(
         uint,
         string memory,
         string memory,
-        // string memory,
-        // string memory,
         uint,
         string memory,
-        // string memory,
-        // string memory,
         string memory,
         string memory,
         string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
         uint
     ) {
         OrthopedicsTestReport storage report = orthoRecords[_medicalRecordNumber];
@@ -641,26 +378,12 @@ function addUrologyTestReport(
             report.patientName,
             report.age,
             report.gender,
-            // report.address1,
             report.bloodGroup,
-            // report.allergies,
             report.testDate,
-            // report.testName,
-            // report.testResult,
             report.xrayTestReport,
             report.mriTestReport,
             report.ctScanTestReport,
             report.ultrasoundTestReport,
-            // report.testDescription,
-            // report.examinationFindings,
-            // report.diagnosis,
-            // report.treatmentPlan,
-            // report.prescription,
-            // report.followUpRecommendations,
-            // report.doctorName,
-            // report.department,
-            // report.hospitalClinic,
-            // report.contactInformation,
             report.reportDate
         );
     }
@@ -669,27 +392,13 @@ function addUrologyTestReport(
         uint,
         string memory,
         uint,
-        // string memory,
-        // string memory,
         string memory,
         string memory,
         uint,
-        // string memory,
-        // string memory,
         string memory,
         string memory,
         string memory,
         string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
         uint
     ) {
         UrologyTestReport storage report = uroRecords[_medicalRecordNumber];
@@ -700,26 +409,12 @@ function addUrologyTestReport(
             report.patientName,
             report.age,
             report.gender,
-            // report.address1,
             report.bloodGroup,
-            // report.allergies,
             report.testDate,
-            // report.testName,
-            // report.testResult,
             report.urinalysisReport,
             report.urinaryCultureReport,
             report.cystoscopyReport,
             report.prostateBiopsyReport,
-            // report.testDescription,
-            // report.examinationFindings,
-            // report.diagnosis,
-            // report.treatmentPlan,
-            // report.prescription,
-            // report.followUpRecommendations,
-            // report.doctorName,
-            // report.department,
-            // report.hospitalClinic,
-            // report.contactInformation,
             report.reportDate
         );
     }
@@ -728,28 +423,14 @@ function addUrologyTestReport(
         uint,
         string memory,
         uint,
-        // string memory,
-        // string memory,
         string memory,
         string memory,
         uint,
         string memory,
-        // string memory,
-        // string memory,
         string memory,
         string memory,
         string memory,
         string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
         uint
     ) {
         NeurologyTestReport storage report = neuroRecords[_medicalRecordNumber];
@@ -760,27 +441,13 @@ function addUrologyTestReport(
             report.patientName,
             report.age,
             report.gender,
-            // report.address1,
             report.bloodGroup,
-            // report.allergies,
             report.testDate,
-            // report.testName,
-            // report.testResult,
             report.neurologicalExaminationReport,
             report.eegReport,
             report.lumbarPunctureReport,
             report.neuropsychologicalTestingReport,
             report.geneticTestingReport,
-            // report.testDescription,
-            // report.examinationFindings,
-            // report.diagnosis,
-            // report.treatmentPlan,
-            // report.prescription,
-            // report.followUpRecommendations,
-            // report.doctorName,
-            // report.department,
-            // report.hospitalClinic,
-            // report.contactInformation,
             report.reportDate
         );
     }
@@ -789,27 +456,13 @@ function addUrologyTestReport(
         uint,
         string memory,
         uint,
-        // string memory,
-        // string memory,
         string memory,
         string memory,
         uint,
-        // string memory,
-        // string memory,
         string memory,
         string memory,
         string memory,
         string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
         uint
     ) {
         GastroenterologyTestReport storage report = gastroRecords[_medicalRecordNumber];
@@ -820,26 +473,12 @@ function addUrologyTestReport(
             report.patientName,
             report.age,
             report.gender,
-            // report.address1,
             report.bloodGroup,
-            // report.allergies,
             report.testDate,
-            // report.testName,
-            // report.testResult,
             report.breathTestsReport,
             report.liverBiopsyReport,
             report.upperEndoscopyReport,
             report.capsuleEndoscopyReport,
-            // report.testDescription,
-            // report.examinationFindings,
-            // report.diagnosis,
-            // report.treatmentPlan,
-            // report.prescription,
-            // report.followUpRecommendations,
-            // report.doctorName,
-            // report.department,
-            // report.hospitalClinic,
-            // report.contactInformation,
             report.reportDate
         );
     }
@@ -848,27 +487,13 @@ function addUrologyTestReport(
         uint,
         string memory,
         uint,
-        // string memory,
-        // string memory,
         string memory,
         string memory,
         uint,
         string memory,
-        // string memory,
-        // string memory,
         string memory,
         string memory,
         string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
-        // string memory,
         uint
     ) {
         CardiologyTestReport storage report = cardioRecords[_medicalRecordNumber];
@@ -879,26 +504,12 @@ function addUrologyTestReport(
             report.patientName,
             report.age,
             report.gender,
-            // report.address1,
             report.bloodGroup,
-            // report.allergies,
             report.testDate,
-            // report.testName,
-            // report.testResult,
             report.electrocardiogramReport,
             report.echocardiogramReport,
             report.stressTestReport,
             report.cardiacMRIReport,
-            // report.testDescription,
-            // report.examinationFindings,
-            // report.diagnosis,
-            // report.treatmentPlan,
-            // report.prescription,
-            // report.followUpRecommendations,
-            // report.doctorName,
-            // report.department,
-            // report.hospitalClinic,
-            // report.contactInformation,
             report.reportDate
         );
     }
