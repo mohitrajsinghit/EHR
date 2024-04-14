@@ -414,7 +414,6 @@ contract healthrecordsystem is AccessControl {
 
 //Medicine List Details
     function getOrthoMedicineList(uint _medicalRecordNumber) public view returns(
-        uint,
         string memory,
         uint,
         string memory,
@@ -432,7 +431,6 @@ contract healthrecordsystem is AccessControl {
         }
         require(medicalRecordNumberFound != 0, "Orthopedics test report not found");
         return (
-            medicalRecordNumberFound,
             report.patientName,
             report.age,
             report.gender,
@@ -458,8 +456,6 @@ contract healthrecordsystem is AccessControl {
                 break;
             }
         }
-
-
         require(report.medicalRecordNumber != 0, "Cardiology test report not found");
         return (
             report.patientName,
