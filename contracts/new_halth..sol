@@ -552,8 +552,7 @@ struct UrologyTestReport {
         uint
     ) {
         NeurologyTestReport storage report = neuroRecords[_medicalRecordNumber];
-        require(report.medicalRecordNumber != 0, "Neurology test report not found");
-        
+        require(report.medicalRecordNumber != 0, "Neurology test report not found");        
         return (
             report.medicalRecordNumber,
             report.patientName,
@@ -584,8 +583,7 @@ struct UrologyTestReport {
         uint
     ) {
         GastroenterologyTestReport storage report = gastroRecords[_medicalRecordNumber];
-        require(report.medicalRecordNumber != 0, "Gastroenterology test report not found");
-        
+        require(report.medicalRecordNumber != 0, "Gastroenterology test report not found");        
         return (
             report.medicalRecordNumber,
             report.patientName,

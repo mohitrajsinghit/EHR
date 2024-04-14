@@ -83,7 +83,6 @@ contract healthrecordsystem is AccessControl {
             _grantRole(URO_DOCTOR_ROLE, _sender);
         }
     }
-    
 
     function checkUser() view external returns(uint64){
         if(hasRole(ADMIN_ROLE, msg.sender)){
@@ -414,16 +413,26 @@ contract healthrecordsystem is AccessControl {
 
 
 //Medicine List Details
-    function getOrthoMedicineList(uint _medicalRecordNumber)public view returns(
+    function getOrthoMedicineList(uint _medicalRecordNumber) public view returns(
+        uint,
         string memory,
-        uint ,
+        uint,
         string memory,
         string memory,
         string memory
     ) {
-        OrthopedicsTestReport storage report = orthoRecords[_medicalRecordNumber];
-        require(report.medicalRecordNumber != 0, "Orthopedics test report not found");
+        OrthopedicsTestReport memory report;
+        uint medicalRecordNumberFound;
+        for(uint i = 1; i <= orthoRecordId; i++) {
+            if(orthoRecords[i].medicalRecordNumber == _medicalRecordNumber) {
+                report = orthoRecords[i];
+                medicalRecordNumberFound = _medicalRecordNumber;
+                break;
+            }
+        }
+        require(medicalRecordNumberFound != 0, "Orthopedics test report not found");
         return (
+            medicalRecordNumberFound,
             report.patientName,
             report.age,
             report.gender,
@@ -431,6 +440,7 @@ contract healthrecordsystem is AccessControl {
             report.MedicineName
         );
     }
+
 
     function getCardioMedicineList(uint _medicalRecordNumber)public view returns(
         string memory,
@@ -440,8 +450,17 @@ contract healthrecordsystem is AccessControl {
         string memory
     ) {
         CardiologyTestReport storage report = cardioRecords[_medicalRecordNumber];
+        uint medicalRecordNumberFound;
+        for(uint i=1;i<=cardioRecordId;i++){
+            if(cardioRecords[i].medicalRecordNumber == _medicalRecordNumber){
+                report = cardioRecords[i];
+                medicalRecordNumberFound = _medicalRecordNumber;
+                break;
+            }
+        }
+
+
         require(report.medicalRecordNumber != 0, "Cardiology test report not found");
-        
         return (
             report.patientName,
             report.age,
@@ -459,6 +478,14 @@ contract healthrecordsystem is AccessControl {
         string memory
     ) {
         NeurologyTestReport storage report = neuroRecords[_medicalRecordNumber];
+        uint medicalRecordNumberFound;
+        for(uint i=1;i<=neuroRecordId;i++){
+            if(neuroRecords[i].medicalRecordNumber == _medicalRecordNumber){
+                report = neuroRecords[i];
+                medicalRecordNumberFound = _medicalRecordNumber;
+                break;
+            }
+        }
         require(report.medicalRecordNumber != 0, "Neurology test report not found");
         return (
             report.patientName,
@@ -477,6 +504,14 @@ contract healthrecordsystem is AccessControl {
         string memory
     ) {
         GastroenterologyTestReport storage report = gastroRecords[_medicalRecordNumber];
+        uint medicalRecordNumberFound;
+        for(uint i=1;i<=gastroRecordId;i++){
+            if(gastroRecords[i].medicalRecordNumber == _medicalRecordNumber){
+                report = gastroRecords[i];
+                medicalRecordNumberFound = _medicalRecordNumber;
+                break;
+            }
+        }
         require(report.medicalRecordNumber != 0, "Gastroenterology test report not found");
         return (
             report.patientName,
@@ -495,6 +530,14 @@ contract healthrecordsystem is AccessControl {
         string memory
     ) {
         UrologyTestReport storage report = uroRecords[_medicalRecordNumber];
+        uint medicalRecordNumberFound;
+        for(uint i=1;i<=uroRecordId;i++){
+            if(uroRecords[i].medicalRecordNumber == _medicalRecordNumber){
+                report = uroRecords[i];
+                medicalRecordNumberFound = _medicalRecordNumber;
+                break;
+            }
+        }
         require(report.medicalRecordNumber != 0, "Urology test report not found");
         
         return (
@@ -524,9 +567,10 @@ contract healthrecordsystem is AccessControl {
         string memory
     ) {
         OrthopedicsTestReport storage report = orthoRecords[0];
-        for(uint i=0; i<=orthoRecordId; i++){
+        for(uint i=1; i<=orthoRecordId; i++){
             if(_medicalRecordNumber == orthoRecords[i].medicalRecordNumber){
                 report = orthoRecords[i];
+                break;
             }
         }
         return (
@@ -558,9 +602,10 @@ contract healthrecordsystem is AccessControl {
         string memory
     ) {
         UrologyTestReport storage report = uroRecords[0];
-        for(uint i=0; i<=uroRecordId; i++){
+        for(uint i=1; i<=uroRecordId; i++){
             if(_medicalRecordNumber == uroRecords[i].medicalRecordNumber){
                 report = uroRecords[i];
+                break;
             }
         }
         return (
@@ -593,9 +638,10 @@ contract healthrecordsystem is AccessControl {
         string memory
     ) {
         NeurologyTestReport storage report = neuroRecords[0];
-        for(uint i=0; i<=neuroRecordId; i++){
+        for(uint i=1; i<=neuroRecordId; i++){
             if(_medicalRecordNumber == neuroRecords[i].medicalRecordNumber){
                 report = neuroRecords[i];
+                break;
             }
         }
         
@@ -629,9 +675,10 @@ contract healthrecordsystem is AccessControl {
         string memory
     ) {
         GastroenterologyTestReport storage report = gastroRecords[0];
-        for(uint i=0; i<=gastroRecordId; i++){
+        for(uint i=1; i<=gastroRecordId; i++){
             if(_medicalRecordNumber == gastroRecords[i].medicalRecordNumber){
                 report = gastroRecords[i];
+                break;
             }
         }
         
@@ -664,9 +711,10 @@ contract healthrecordsystem is AccessControl {
         string memory
     ) {
         CardiologyTestReport storage report = cardioRecords[0];
-        for(uint i=0; i<=cardioRecordId; i++){
+        for(uint i=1; i<=cardioRecordId; i++){
             if(_medicalRecordNumber == cardioRecords[i].medicalRecordNumber){
                 report = cardioRecords[i];
+                break;
             }
         }
         return (
@@ -725,14 +773,12 @@ contract healthrecordsystem is AccessControl {
         return (uroRecordId, records);
     }
 
-
     function findRecords(address _user) external view returns(OrthopedicsTestReport[] memory, CardiologyTestReport[] memory, NeurologyTestReport[] memory, GastroenterologyTestReport[] memory, UrologyTestReport[] memory) {        
-        
         OrthopedicsTestReport[] memory _ortho = new OrthopedicsTestReport[](orthoRecordId);
         uint _orthoCount = 0;
         for(uint i=0; i<=orthoRecordId; i++){
             if(_user == orthoRecords[i].userAddress){
-                _ortho[_orthoCount] = orthoRecords[i];
+                _ortho[_orthoCount] = (orthoRecords[i]);
                 _orthoCount++;
             }
         }
@@ -751,6 +797,7 @@ contract healthrecordsystem is AccessControl {
         for(uint i=0; i<=cardioRecordId; i++){
             if(_user == cardioRecords[i].userAddress){
                 _cardio[_cardioCount]=(cardioRecords[i]);
+                _cardioCount++;
             }
         }
 
@@ -760,6 +807,7 @@ contract healthrecordsystem is AccessControl {
         for(uint i=0; i<=gastroRecordId; i++){
             if(_user == orthoRecords[i].userAddress){
                 _gastro[_gastroCount]=(gastroRecords[i]);
+                _gastroCount++;
             }
         }
 
@@ -769,6 +817,7 @@ contract healthrecordsystem is AccessControl {
         for(uint i=0; i<=uroRecordId; i++){
             if(_user == uroRecords[i].userAddress){
                 _uro[_uroCount]=(uroRecords[i]);
+                _uroCount++;
             }
         }
         return (_ortho, _cardio, _neuro, _gastro, _uro);
